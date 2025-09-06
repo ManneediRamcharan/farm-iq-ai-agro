@@ -23,6 +23,7 @@ import {
 import CropRecommendation from "./modules/CropRecommendation";
 import DiseaseDetection from "./modules/DiseaseDetection";
 import Marketplace from "./modules/Marketplace";
+import EquipmentRental from "./modules/EquipmentRental";
 import LearningHub from "./modules/LearningHub";
 import WeatherAlerts from "./modules/WeatherAlerts";
 import ChatBot from "./ChatBot";
@@ -37,6 +38,7 @@ const Dashboard = () => {
     { id: "crop-recommendation", icon: Sprout, label: "Crop Recommendation", badge: "AI" },
     { id: "disease-detection", icon: Leaf, label: "Disease Detection", badge: "Smart" },
     { id: "marketplace", icon: ShoppingCart, label: "Marketplace", badge: "New" },
+    { id: "equipment-rental", icon: Truck, label: "Equipment Rental", badge: null },
     { id: "learning-hub", icon: BookOpen, label: "Learning Hub", badge: "Popular" },
     { id: "weather-alerts", icon: CloudRain, label: "Weather & Alerts", badge: "Live" },
   ];
@@ -84,6 +86,8 @@ const Dashboard = () => {
         return <DiseaseDetection />;
       case "marketplace":
         return <Marketplace />;
+      case "equipment-rental":
+        return <EquipmentRental />;
       case "learning-hub":
         return <LearningHub />;
       case "weather-alerts":
