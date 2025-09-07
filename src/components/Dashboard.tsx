@@ -18,7 +18,8 @@ import {
   TrendingUp,
   AlertTriangle,
   Sprout,
-  ThermometerSun
+  ThermometerSun,
+  Tractor
 } from "lucide-react";
 import CropRecommendation from "./modules/CropRecommendation";
 import DiseaseDetection from "./modules/DiseaseDetection";
@@ -199,7 +200,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             {!sidebarCollapsed && (
               <div className="flex items-center space-x-2">
-                <Leaf className="h-8 w-8 text-primary" />
+                <Tractor className="h-8 w-8 text-primary" />
                 <span className="text-xl font-bold">FarmIQ</span>
               </div>
             )}
