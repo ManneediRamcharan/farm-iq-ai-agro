@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 import { 
   ShoppingCart, 
   Search, 
@@ -11,7 +13,11 @@ import {
   Star,
   Package,
   Leaf,
-  Bug
+  Bug,
+  Plus,
+  Minus,
+  Trash2,
+  PlusCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -165,6 +171,56 @@ const FarmMarket = () => {
     });
   };
 
+  const removeFromCart = (productId: string) => {
+    setCart(prev => {
+      const newCart = { ...prev };
+      if (newCart[productId] > 1) {
+        newCart[productId]--;
+      } else {
+        delete newCart[productId];
+      }
+      return newCart;
+    });
+    toast({
+      title: "Removed from Cart",
+      description: "Item has been removed from your cart",
+    });
+  };
+
+  const removeAllFromCart = (productId: string) => {
+    setCart(prev => {
+      const newCart = { ...prev };
+      delete newCart[productId];
+      return newCart;
+    });
+    toast({
+      title: "Removed from Cart",
+      description: "All items removed from your cart",
+    });
+  };
+
+  const addAllToCart = () => {
+    const newCart = { ...cart };
+    filteredProducts.forEach(product => {
+      if (product.stock > 0) {
+        newCart[product.id] = (newCart[product.id] || 0) + 1;
+      }
+    });
+    setCart(newCart);
+    toast({
+      title: "Added All to Cart",
+      description: `${filteredProducts.length} items added to your cart`,
+    });
+  };
+
+  const clearCart = () => {
+    setCart({});
+    toast({
+      title: "Cart Cleared",
+      description: "All items removed from cart",
+    });
+  };
+
   const getCartTotal = () => {
     return Object.entries(cart).reduce((total, [productId, quantity]) => {
       const product = products.find(p => p.id === productId);
@@ -195,13 +251,100 @@ const FarmMarket = () => {
           </p>
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" className="relative">
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            Cart ({getCartItemCount()})
-            {getCartItemCount() > 0 && (
-              <Badge className="ml-2">₹{getCartTotal().toLocaleString()}</Badge>
-            )}
+          <Button 
+            variant="outline" 
+            onClick={addAllToCart}
+            disabled={filteredProducts.length === 0}
+          >
+            <PlusCircle className="h-4 w-4 mr-2" />
+            Add All to Cart
           </Button>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="relative">
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Cart ({getCartItemCount()})
+                {getCartItemCount() > 0 && (
+                  <Badge className="ml-2">₹{getCartTotal().toLocaleString()}</Badge>
+                )}
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="w-96">
+              <SheetHeader>
+                <SheetTitle>Shopping Cart ({getCartItemCount()} items)</SheetTitle>
+              </SheetHeader>
+              <div className="mt-6 space-y-4">
+                {Object.keys(cart).length === 0 ? (
+                  <div className="text-center py-8">
+                    <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-muted-foreground">Your cart is empty</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="space-y-4 max-h-96 overflow-y-auto">
+                      {Object.entries(cart).map(([productId, quantity]) => {
+                        const product = products.find(p => p.id === productId);
+                        if (!product) return null;
+                        
+                        return (
+                          <div key={productId} className="flex items-center space-x-3 p-3 border rounded-lg">
+                            <div className="text-2xl">{product.image}</div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-medium truncate">{product.name}</h4>
+                              <p className="text-sm text-muted-foreground">₹{product.price} per {product.unit}</p>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => removeFromCart(productId)}
+                              >
+                                <Minus className="h-3 w-3" />
+                              </Button>
+                              <span className="text-sm font-medium w-8 text-center">{quantity}</span>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => addToCart(productId)}
+                              >
+                                <Plus className="h-3 w-3" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => removeAllFromCart(productId)}
+                              >
+                                <Trash2 className="h-3 w-3" />
+                              </Button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <Separator />
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Total:</span>
+                        <span className="text-xl font-bold">₹{getCartTotal().toLocaleString()}</span>
+                      </div>
+                      <div className="space-y-2">
+                        <Button className="w-full" size="lg">
+                          Proceed to Checkout
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          className="w-full" 
+                          onClick={clearCart}
+                        >
+                          Clear Cart
+                        </Button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
 
