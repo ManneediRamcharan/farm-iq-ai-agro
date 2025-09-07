@@ -36,7 +36,7 @@ const Dashboard = () => {
     { id: "dashboard", icon: BarChart, label: "Dashboard", badge: null },
     { id: "crop-recommendation", icon: Sprout, label: "Crop Recommendation", badge: "AI" },
     { id: "disease-detection", icon: Leaf, label: "Disease Detection", badge: "Smart" },
-    { id: "marketplace", icon: ShoppingCart, label: "Marketplace", badge: "New" },
+    { id: "marketplace", icon: ShoppingCart, label: "Farmer Exchange", badge: "New" },
     { id: "equipment-rental", icon: Truck, label: "Equipment Rental", badge: null },
     { id: "weather-alerts", icon: CloudRain, label: "Weather & Alerts", badge: "Live" },
   ];
