@@ -38,6 +38,7 @@ const Dashboard = () => {
     { id: "crop-recommendation", icon: Sprout, label: "Crop Recommendation", badge: "AI" },
     { id: "disease-detection", icon: Leaf, label: "Disease Detection", badge: "Smart" },
     { id: "marketplace", icon: ShoppingCart, label: "Farmer Exchange", badge: "New" },
+    { id: "market-place", icon: ShoppingCart, label: "Market Place", badge: null },
     { id: "equipment-rental", icon: Truck, label: "Equipment Rental", badge: null },
     { id: "weather-alerts", icon: CloudRain, label: "Weather & Alerts", badge: "Live" },
   ];
@@ -85,6 +86,8 @@ const Dashboard = () => {
         return <DiseaseDetection />;
       case "marketplace":
         return <Marketplace />;
+      case "market-place":
+        return <div className="p-6"><h2 className="text-2xl font-bold">Market Place</h2><p className="text-muted-foreground mt-2">Market place functionality coming soon...</p></div>;
       case "equipment-rental":
         return <EquipmentRental />;
       case "weather-alerts":
