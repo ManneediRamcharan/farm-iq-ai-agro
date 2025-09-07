@@ -25,6 +25,7 @@ import CropRecommendation from "./modules/CropRecommendation";
 import DiseaseDetection from "./modules/DiseaseDetection";
 import Marketplace from "./modules/Marketplace";
 import EquipmentRental from "./modules/EquipmentRental";
+import FarmMarket from "./modules/FarmMarket";
 import WeatherAlerts from "./modules/WeatherAlerts";
 import ChatBot from "./ChatBot";
 
@@ -87,7 +88,7 @@ const Dashboard = () => {
       case "marketplace":
         return <Marketplace />;
       case "market-place":
-        return <div className="p-6"><h2 className="text-2xl font-bold">Market Place</h2><p className="text-muted-foreground mt-2">Market place functionality coming soon...</p></div>;
+        return <FarmMarket />;
       case "equipment-rental":
         return <EquipmentRental />;
       case "weather-alerts":
