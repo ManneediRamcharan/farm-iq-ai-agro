@@ -27,6 +27,7 @@ import Marketplace from "./modules/Marketplace";
 import EquipmentRental from "./modules/EquipmentRental";
 import FarmMarket from "./modules/FarmMarket";
 import WeatherAlerts from "./modules/WeatherAlerts";
+import GovernmentSchemes from "./modules/GovernmentSchemes";
 import ChatBot from "./ChatBot";
 
 const Dashboard = () => {
@@ -42,6 +43,7 @@ const Dashboard = () => {
     { id: "market-place", icon: ShoppingCart, label: "Market Place", badge: null },
     { id: "equipment-rental", icon: Truck, label: "Equipment Rental", badge: null },
     { id: "weather-alerts", icon: CloudRain, label: "Weather & Alerts", badge: "Live" },
+    { id: "government-schemes", icon: BookOpen, label: "Government Schemes", badge: "Gov" },
   ];
 
   const dashboardStats = [
@@ -93,6 +95,8 @@ const Dashboard = () => {
         return <EquipmentRental />;
       case "weather-alerts":
         return <WeatherAlerts />;
+      case "government-schemes":
+        return <GovernmentSchemes />;
       default:
         return (
           <div className="space-y-6">
