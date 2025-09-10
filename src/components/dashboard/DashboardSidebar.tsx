@@ -56,6 +56,18 @@ const DashboardSidebar = ({
       badge: "Gov" 
     },
     { 
+      id: "farmer-market", 
+      icon: Users, 
+      label: "Farmer-to-Farmer", 
+      badge: null 
+    },
+    { 
+      id: "disease-detection", 
+      icon: Sprout, 
+      label: "Crop Disease Detection", 
+      badge: "AI" 
+    },
+    { 
       id: "rentals", 
       icon: Truck, 
       label: "Equipment Rentals", 
@@ -66,12 +78,6 @@ const DashboardSidebar = ({
       icon: BookOpen, 
       label: "Videos & Learning", 
       badge: "New" 
-    },
-    { 
-      id: "farmer-market", 
-      icon: Users, 
-      label: "Farmer-to-Farmer", 
-      badge: null 
     },
     { 
       id: "help", 
